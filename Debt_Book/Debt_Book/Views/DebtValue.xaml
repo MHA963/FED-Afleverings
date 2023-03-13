@@ -1,0 +1,61 @@
+﻿<Window x:Class="Debt_Book.Views.DebtValue"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Debt_Book.Views"
+        mc:Ignorable="d"
+        Title="DebtValue" Height="450" Width="500">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="91*"/>
+            <ColumnDefinition Width="0*"/>
+            <ColumnDefinition Width="109*"/>
+        </Grid.ColumnDefinitions>
+
+        <DataGrid ItemsSource="{Binding Path=CurrentAgent.Transactions}"
+                  SelectedItem="{Binding Path=CurrentTranscation}"
+                  IsSynchronizedWithCurrentItem="True"
+                  IsReadOnly="True"
+                  CanUserAddRows="False"
+                  CanUserDeleteRows="False"/>
+
+
+
+
+        <Button x:Name="btnaddvalue"
+                Grid.Column="2"
+                Content="Add Value"
+                HorizontalAlignment="Left"
+                Margin="117,118,0,0"
+                VerticalAlignment="Top"
+                Click="btnaddvalue_Click"
+                IsDefault="True"
+                Command="{Binding Path=AddValueCommand}"/>
+
+        <TextBox x:Name="tbxValuee"
+                 Grid.Column="2"
+                 HorizontalAlignment="Left"
+                 Margin="108,37,0,0"
+                 TextWrapping="Wrap"
+                 VerticalAlignment="Top"
+                 Width="120"
+                 Text="{Binding Path=CurrentTransaction.Trans}"/>
+
+        <Button x:Name="btncancel"
+                Grid.Column="2"
+                Content="_Cancel"
+                HorizontalAlignment="Left"
+                Margin="218,118,0,0"
+                VerticalAlignment="Top"
+                IsCancel="True"/>
+
+        <Label x:Name="lbValue"
+               Grid.Column="2"
+               Content="Value:"
+               HorizontalAlignment="Left"
+               Margin="21,34,0,0"
+               VerticalAlignment="Top"
+               RenderTransformOrigin="-0.097,0.47"/>
+    </Grid>
+</Window>

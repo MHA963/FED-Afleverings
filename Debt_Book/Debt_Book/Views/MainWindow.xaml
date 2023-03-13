@@ -1,0 +1,71 @@
+﻿<Window x:Class="Debt_Book.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+        xmlns:viewModel="clr-namespace:Debt_Book.ViewModel"
+        xmlns:local="clr-namespace:Debt_Book"
+        xmlns:prism="http://prismlibrary.com/"
+        prism:ViewModelLocator.AutoWireViewModel="True"
+        mc:Ignorable="d"
+        Title="The Debt Book" Height="450" Width="800">
+    
+
+               <DockPanel Name="dbName">
+                    <Menu DockPanel.Dock="Top" Name="MainMenu">
+                         <MenuItem Header="_File">
+                              <MenuItem Header="_Open" Command="{Binding Open_FileCommand}"></MenuItem>
+                              <MenuItem Header="_Save_As" Command="{Binding Save_As_Command}"></MenuItem>
+                         </MenuItem>
+
+                    </Menu>
+
+          <Grid>
+               <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="auto"/>
+               </Grid.ColumnDefinitions>
+
+               <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+               </Grid.RowDefinitions>
+
+               <TextBlock HorizontalAlignment="Left" Margin="26,10,0,0" 
+                     Grid.Row="1" TextWrapping="Wrap" Text="Debtors:" VerticalAlignment="Top" FontSize="24"/>
+
+
+               <Button Grid.Column="1" Content="Add" HorizontalAlignment="Left" Margin="255,66,0,0" Grid.Row="1"
+                  VerticalAlignment="Top" Height="38" Width="90" Command="{Binding AddCommand}"/>
+
+
+               <DataGrid x:Name="agentlist" Grid.Row="2"
+            ItemsSource="{Binding Path=Agents}"
+            SelectedIndex="{Binding Path=CurrentIndex}"
+            SelectedItem="{Binding Path=CurrentAgent}"
+            Grid.ColumnSpan="2" Margin="26,48,125,-113" 
+            AutoGenerateColumns="False"
+            IsSynchronizedWithCurrentItem="True"
+            IsReadOnly="True">
+
+                    <DataGrid.Columns>
+                         <DataGridTextColumn Header="Name" Binding="{Binding Path=NAME}" MinWidth="150"/>
+                         <DataGridTextColumn Header="Dept" Binding="{Binding Path= TAmount}" MinWidth="140"/>
+                    </DataGrid.Columns>
+
+                    <i:Interaction.Triggers>
+                         <i:EventTrigger EventName="MouseDoubleClick">
+                              <prism:InvokeCommandAction Command="{Binding EditCommand}"/>
+                         </i:EventTrigger>
+                    </i:Interaction.Triggers>
+          </DataGrid>
+          </Grid>
+
+     </DockPanel>
+
+
+       
+
+    
+</Window>
